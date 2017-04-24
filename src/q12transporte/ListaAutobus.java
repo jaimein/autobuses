@@ -1,0 +1,186 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package q12transporte;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author jaime
+ */
+public class ListaAutobus {
+
+    //Atributos
+    private ArrayList<Autobus> listaBuses = new ArrayList<Autobus>();
+    private int x = 0;
+
+    /**
+     * Metodo para añadir un busuctor a la lista, previamente comprueba si
+     * existe
+     *
+     * @param bus
+     * @return
+     * @throws q12transporte.ExcepcionPersonal
+     */
+    public boolean insertar(Autobus bus) throws ExcepcionPersonal {
+
+        existe(bus);
+        return listaBuses.add(bus);
+    }
+
+    /**
+     * nos devuelve el siguiente elemento
+     *
+     * @return
+     * @throws q12transporte.ExcepcionPersonal
+     */
+    public Autobus siguiente() throws ExcepcionPersonal {
+        hay();
+        x++;
+        return listaBuses.get(x);
+    }
+
+    /**
+     * nos devuelve el anterior elemento
+     *
+     * @return
+     * @throws q12transporte.ExcepcionPersonal
+     */
+    public Autobus anterior() throws ExcepcionPersonal {
+        hay();
+        x--;
+        return listaBuses.get(x);
+    }
+
+    /**
+     * nos devuelve el primer elemento
+     *
+     * @return
+     * @throws ExcepcionPersonal
+     */
+    public Autobus primer() throws ExcepcionPersonal {
+        hay();
+        x = 0;
+        return listaBuses.get(x);
+    }
+
+    /**
+     * nos devuele el ultimo
+     *
+     * @return
+     * @throws q12transporte.ExcepcionPersonal
+     */
+    public Autobus ultimo() throws ExcepcionPersonal {
+        hay();
+        x = listaBuses.size() - 1;
+        return listaBuses.get(x);
+    }
+
+    /**
+     * pregunta si el que se esta mostrando es el ultimo
+     *
+     * @return
+     * @throws q12transporte.ExcepcionPersonal
+     */
+    public boolean isUltimo() throws ExcepcionPersonal {
+        hay();
+        return listaBuses.size() - 1 == x;
+    }
+
+    /**
+     * limpia la lista
+     */
+    public void limpiar() throws ExcepcionPersonal {
+        hay();
+        listaBuses.clear();
+    }
+
+    /**
+     * elimina el que se ha visualizado
+     *
+     * @throws q12transporte.ExcepcionPersonal
+     */
+    public void borrar() throws ExcepcionPersonal {
+        hay();
+        listaBuses.remove(x);
+    }
+
+    /**
+     * Comprueba si hay buses y si no lanza un Excepcion
+     *
+     * @throws ExcepcionPersonal
+     */
+    public void hay() throws ExcepcionPersonal {
+        if (listaBuses.isEmpty()) {
+            throw new ExcepcionPersonal("No hay buses");
+        }
+    }
+
+    /**
+     * Comprueba si existe un bus
+     *
+     * @param bus
+     * @throws ExcepcionPersonal
+     */
+    public void existe(Autobus bus) throws ExcepcionPersonal {
+        hay();
+        int i = 0;
+        do {
+            if (bus.getMatricula().getLetras().equalsIgnoreCase(listaBuses.get(i).getMatricula().getLetras())) {
+                if (bus.getMatricula().getNumero() == listaBuses.get(i).getMatricula().getNumero()) {
+                    throw new ExcepcionPersonal("El bus ya existe");
+                }
+
+            }
+            i++;
+        } while (i <= listaBuses.size() - 1);
+    }
+
+    /**
+     * Busca un bus y devuele si existe o no
+     * @param bus
+     * @return
+     * @throws ExcepcionPersonal
+     */
+    public boolean buscar(Autobus bus) throws ExcepcionPersonal {
+        boolean boovar = false;
+        hay();
+        int i = 0;
+        do {
+            if (bus.getMatricula().getLetras().equalsIgnoreCase(listaBuses.get(i).getMatricula().getLetras())) {
+                if (bus.getMatricula().getNumero() == listaBuses.get(i).getMatricula().getNumero()) {
+                    boovar=true;
+                }
+
+            }
+            i++;
+        } while ((i <= listaBuses.size() - 1) || (boovar=true));
+        return boovar;
+    }
+    
+    /**
+     * Busca un autobus por el Id  y lo devuelve, null si no existe
+     * @param num_ident
+     * @return
+     * @throws ExcepcionPersonal
+     */
+    public Autobus devAutobus(int num_ident) throws ExcepcionPersonal{
+        Autobus devo = null;
+        boolean boovar=false;
+        hay();
+        int i = 0;
+        do {
+            if (num_ident == listaBuses.get(i).getId()) {
+                devo = listaBuses.get(i);
+                boovar = true;
+            }
+            i++;
+        } while ((i <= listaBuses.size() - 1) || (boovar=true));
+        
+        return devo;
+    }
+
+}
