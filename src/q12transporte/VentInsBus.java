@@ -23,6 +23,7 @@ public class VentInsBus extends javax.swing.JFrame {
      * @param bus
      * @param conduc
      * @param Accion
+     * @throws q12transporte.ExcepcionPersonal
      */
     public VentInsBus(ListaAutobus bus, ListaConductores conduc, String Accion) throws ExcepcionPersonal {
         initComponents();
@@ -33,6 +34,7 @@ public class VentInsBus extends javax.swing.JFrame {
         do {
             jClistaConductores.addItem(conduc.siguiente().getNombre());
         } while (!(Chofers.isUltimo()));
+        
         
     }
 
@@ -46,6 +48,7 @@ public class VentInsBus extends javax.swing.JFrame {
     private void initComponents() {
 
         bGtipoBus = new javax.swing.ButtonGroup();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -64,6 +67,10 @@ public class VentInsBus extends javax.swing.JFrame {
         jRurbano = new javax.swing.JRadioButton();
         jRinterurbano = new javax.swing.JRadioButton();
         jBguardar = new javax.swing.JButton();
+        jCruta = new javax.swing.JComboBox<>();
+        jTprecio = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,6 +182,14 @@ public class VentInsBus extends javax.swing.JFrame {
             }
         });
 
+        jCruta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
+
+        jTprecio.setEditable(false);
+
+        jLabel7.setText("Ruta");
+
+        jLabel8.setText("km");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -187,13 +202,25 @@ public class VentInsBus extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jRurbano)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRinterurbano)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jRurbano))
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jTprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel8))
+                            .addComponent(jRinterurbano)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -211,9 +238,17 @@ public class VentInsBus extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRurbano)
                     .addComponent(jRinterurbano))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jCruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBguardar))
         );
 
@@ -246,48 +281,26 @@ public class VentInsBus extends javax.swing.JFrame {
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         // TODO add your handling code here:
         try {
-            float precio;
-            long numMa;
-            Matricula ma;
-            Conductor cond;
-            if (jTId.getText().isEmpty()) {
-                throw new  ExcepcionPersonal("Nombre en blanco");
-            }
-            precio = Float.parseFloat(jTprecioViaje.getText());
-            if (jTmatLetras.getText().isEmpty()){
-                throw new ExcepcionPersonal("Las letras de la matricula no pueden estar vacias");
-            } else if (jTmatLetras.getText().length() != 3) {
-                throw new ExcepcionPersonal("Cantidad de letras invalida, introduzca solo 3 por favor");
-            }
-            numMa = Long.getLong(jTmatNum.getText());
-            ma = new Matricula(jTmatLetras.getText(), numMa);
-            String preba = jClistaConductores.getItemAt(jClistaConductores.getSelectedIndex());
-            if(jRurbano.isSelected()){
-                String ruta="A";
-                AutobusUrbano urbano;
-                urbano = new AutobusUrbano(Integer.parseInt(jTId.getText(), Chofers.devConductorId(jClistaConductores.getSelectedIndex(), precio, ma, ruta);
-            }
             
-        } catch (ExcepcionPersonal e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "El precio y los numero de la matricula deben de ser numericos", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_jBguardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGtipoBus;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jBguardar;
     private javax.swing.JComboBox<String> jClistaConductores;
+    private javax.swing.JComboBox<String> jCruta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -297,6 +310,7 @@ public class VentInsBus extends javax.swing.JFrame {
     private javax.swing.JTextField jTId;
     private javax.swing.JTextField jTmatLetras;
     private javax.swing.JTextField jTmatNum;
+    private javax.swing.JTextField jTprecio;
     private javax.swing.JTextField jTprecioViaje;
     // End of variables declaration//GEN-END:variables
 }
