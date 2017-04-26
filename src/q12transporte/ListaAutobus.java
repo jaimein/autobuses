@@ -26,7 +26,9 @@ public class ListaAutobus {
      * @throws q12transporte.ExcepcionPersonal
      */
     public boolean insertar(Autobus bus) throws ExcepcionPersonal {
-
+        if ("".equals(bus.getId())) {
+            throw new ExcepcionPersonal("El ID no puede estar en blanco");
+        }
         existe(bus);
         return listaBuses.add(bus);
     }
@@ -108,6 +110,23 @@ public class ListaAutobus {
         listaBuses.remove(x);
     }
 
+    public void borrarPorId(int id) throws ExcepcionPersonal {
+        hay();
+        int i = 0;
+        boolean borrado = false;
+        do {
+            if (id == listaBuses.get(i).getId()) {
+                listaBuses.remove(i);
+                borrado= true;
+            }
+            i++;
+        } while ((i <= listaBuses.size() - 1) && (borrado=false));
+        if(borrado=false){
+            throw new ExcepcionPersonal("No se ha encotrodo el id del bus para borrarlo");
+        }
+        
+    }
+
     /**
      * Comprueba si hay buses y si no lanza un Excepcion
      *
@@ -126,21 +145,26 @@ public class ListaAutobus {
      * @throws ExcepcionPersonal
      */
     public void existe(Autobus bus) throws ExcepcionPersonal {
-        hay();
-        int i = 0;
-        do {
-            if (bus.getMatricula().getLetras().equalsIgnoreCase(listaBuses.get(i).getMatricula().getLetras())) {
-                if (bus.getMatricula().getNumero() == listaBuses.get(i).getMatricula().getNumero()) {
-                    throw new ExcepcionPersonal("El bus ya existe");
+        if (!listaBuses.isEmpty()) {
+            int i = 0;
+            do {
+                if (bus.getMatricula().getLetras().equalsIgnoreCase(listaBuses.get(i).getMatricula().getLetras())) {
+                    if (bus.getMatricula().getNumero() == listaBuses.get(i).getMatricula().getNumero()) {
+                        throw new ExcepcionPersonal("El bus ya existe");
+                    }
                 }
+                if (bus.getId() == listaBuses.get(i).getId()) {
+                    throw new ExcepcionPersonal("El id del bus ya existe");
+                }
+                i++;
+            } while (i <= listaBuses.size() - 1);
+        }
 
-            }
-            i++;
-        } while (i <= listaBuses.size() - 1);
     }
 
     /**
      * Busca un bus y devuele si existe o no
+     *
      * @param bus
      * @return
      * @throws ExcepcionPersonal
@@ -152,24 +176,25 @@ public class ListaAutobus {
         do {
             if (bus.getMatricula().getLetras().equalsIgnoreCase(listaBuses.get(i).getMatricula().getLetras())) {
                 if (bus.getMatricula().getNumero() == listaBuses.get(i).getMatricula().getNumero()) {
-                    boovar=true;
+                    boovar = true;
                 }
 
             }
             i++;
-        } while ((i <= listaBuses.size() - 1) || (boovar=true));
+        } while ((i <= listaBuses.size() - 1) || (boovar = true));
         return boovar;
     }
-    
+
     /**
-     * Busca un autobus por el Id  y lo devuelve, null si no existe
+     * Busca un autobus por el Id y lo devuelve, null si no existe
+     *
      * @param num_ident
      * @return
      * @throws ExcepcionPersonal
      */
-    public Autobus devAutobus(int num_ident) throws ExcepcionPersonal{
+    public Autobus devAutobus(int num_ident) throws ExcepcionPersonal {
         Autobus devo = null;
-        boolean boovar=false;
+        boolean boovar = false;
         hay();
         int i = 0;
         do {
@@ -178,8 +203,8 @@ public class ListaAutobus {
                 boovar = true;
             }
             i++;
-        } while ((i <= listaBuses.size() - 1) || (boovar=true));
-        
+        } while ((i <= listaBuses.size() - 1) || (boovar = true));
+
         return devo;
     }
 

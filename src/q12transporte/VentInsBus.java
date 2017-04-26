@@ -34,8 +34,7 @@ public class VentInsBus extends javax.swing.JFrame {
         do {
             jClistaConductores.addItem(conduc.siguiente().getNombre());
         } while (!(Chofers.isUltimo()));
-        
-        
+
     }
 
     /**
@@ -68,7 +67,7 @@ public class VentInsBus extends javax.swing.JFrame {
         jRinterurbano = new javax.swing.JRadioButton();
         jBguardar = new javax.swing.JButton();
         jCruta = new javax.swing.JComboBox<>();
-        jTprecio = new javax.swing.JTextField();
+        jTkm = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -184,7 +183,7 @@ public class VentInsBus extends javax.swing.JFrame {
 
         jCruta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
 
-        jTprecio.setEditable(false);
+        jTkm.setEditable(false);
 
         jLabel7.setText("Ruta");
 
@@ -214,7 +213,7 @@ public class VentInsBus extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addComponent(jTprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTkm, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
                                 .addComponent(jLabel8))
                             .addComponent(jRinterurbano)))
@@ -244,7 +243,7 @@ public class VentInsBus extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addComponent(jCruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,9 +279,37 @@ public class VentInsBus extends javax.swing.JFrame {
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         // TODO add your handling code here:
+        
+        int id;
+        Conductor cond;
+        float precio;
+        Matricula matri;
+        long numMa;
+        String letMa;
         try {
+            id = Integer.parseInt(jTId.getText());
+            cond = Chofers.devConductorId(jClistaConductores.getSelectedIndex()-1);
+            precio = Float.parseFloat(jTprecioViaje.getText());
+            letMa = jTmatLetras.getText();
+            numMa = Long.parseLong(jTmatNum.getText());
+            matri = new Matricula(letMa, numMa);
             
+            if (jRurbano.isSelected()) {
+               // System.out.println(jCruta.geti);
+               // String ruta = jCruta.getItemAt(jCruta.getItemCount());
+                AutobusUrbano urb = new AutobusUrbano(id, cond, precio, matri, jCruta.getItemAt(jCruta.getSelectedIndex()));
+                Buses.insertar(urb);
+                JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            } else {
+            }
+
+        } catch(ExcepcionPersonal e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBguardarActionPerformed
 
@@ -308,9 +335,9 @@ public class VentInsBus extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRinterurbano;
     private javax.swing.JRadioButton jRurbano;
     private javax.swing.JTextField jTId;
+    private javax.swing.JTextField jTkm;
     private javax.swing.JTextField jTmatLetras;
     private javax.swing.JTextField jTmatNum;
-    private javax.swing.JTextField jTprecio;
     private javax.swing.JTextField jTprecioViaje;
     // End of variables declaration//GEN-END:variables
 }

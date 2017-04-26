@@ -28,6 +28,9 @@ public class ListaConductores {
     public boolean insertar(Conductor cond) throws ExcepcionPersonal {
 
         existe(cond);
+        if("".equals(cond.getNombre())){
+            throw new ExcepcionPersonal("El nombre no puede estar en blanco");
+        }
         return listaConductores.add(cond);
     }
 
@@ -92,8 +95,10 @@ public class ListaConductores {
 
     /**
      * limpia la lista
+     * @throws q12transporte.ExcepcionPersonal
      */
-    public void limpiar() {
+    public void limpiar() throws ExcepcionPersonal {
+        hay();
         listaConductores.clear();
     }
 

@@ -42,7 +42,13 @@ public class Matricula {
         this.numero = numero;
     }
 
-    public Matricula(String letras, long numero) {
+    public Matricula(String letras, long numero) throws ExcepcionPersonal {
+        if (letras.length()!=3) {
+            throw new ExcepcionPersonal("La matricula tiene que contener 3 letras");
+        }
+        if (numero>10000){
+            throw new ExcepcionPersonal("El numero de la matricula no puede tener mas de 4 cifras");
+        }
         this.letras = letras;
         this.numero = numero;
     }

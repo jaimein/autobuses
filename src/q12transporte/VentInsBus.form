@@ -95,7 +95,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                  <Component id="jTprecio" min="-2" pref="59" max="-2" attributes="0"/>
+                                  <Component id="jTkm" min="-2" pref="59" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -136,7 +136,7 @@
                           <Component id="jCruta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jTprecio" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTkm" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -349,7 +349,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTprecio">
+        <Component class="javax.swing.JTextField" name="jTkm">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>

@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 package q12transporte;
 
 /**
@@ -15,7 +17,7 @@ public class Q12Transporte {
      * @param args the command line arguments
      * @throws q12transporte.ExcepcionPersonal
      */
-    public static void main(String[] args) throws ExcepcionPersonal {
+//    public static void main(String[] args) throws ExcepcionPersonal {
         // TODO code application logic here
         
         /*
@@ -37,6 +39,6 @@ public class Q12Transporte {
         //ListaAutobus Auto = 
         
         
-    }
+//    }
     
 }

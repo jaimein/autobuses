@@ -33,11 +33,7 @@ public class VentEleccion extends javax.swing.JFrame {
         this.Accion = Accion;
         //jLAccion.setText(Accion);
                 
-        Conductor cond = new Conductor("pru1", 1234);
-        Conductor cond2 = new Conductor("pru2", 4321);
-        ////Trampa
-        Chofers.insertar(cond);
-        Chofers.insertar(cond2);
+       
     }
 
     /**
@@ -65,6 +61,11 @@ public class VentEleccion extends javax.swing.JFrame {
         });
 
         jBconductor.setText("Conductor");
+        jBconductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBconductorActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Selecione para realizar la accion");
 
@@ -136,7 +137,28 @@ public class VentEleccion extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+        if (Accion.equalsIgnoreCase("Borrar")){
+            
+        }
     }//GEN-LAST:event_jBautobusActionPerformed
+
+    private void jBconductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconductorActionPerformed
+        // TODO add your handling code here:
+        if (Accion.equalsIgnoreCase("Limpiar lista")) {
+            try {
+                Chofers.limpiar();
+                JOptionPane.showMessageDialog(null, "Eliminados registros", "Limpiar", JOptionPane.INFORMATION_MESSAGE);
+            } catch (ExcepcionPersonal ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            this.dispose();
+        }
+        if (Accion.equalsIgnoreCase("Insertar")) {
+            //JOptionPane.showMessageDialog(null, "pppppppp", "Error", JOptionPane.ERROR_MESSAGE);
+            VentInsCond vent = new VentInsCond(Chofers);
+            vent.setVisible(true);
+        }
+    }//GEN-LAST:event_jBconductorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
