@@ -31,9 +31,11 @@ public class VentInsBus extends javax.swing.JFrame {
         this.Chofers = conduc;
         this.Accion = Accion;
         jClistaConductores.addItem(conduc.primer().getNombre());
-        do {
-            jClistaConductores.addItem(conduc.siguiente().getNombre());
-        } while (!(Chofers.isUltimo()));
+        if (!conduc.isUltimo()) {
+            do {
+                jClistaConductores.addItem(conduc.siguiente().getNombre());
+            } while (!(Chofers.isUltimo()));
+        }
 
     }
 
@@ -279,7 +281,7 @@ public class VentInsBus extends javax.swing.JFrame {
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         // TODO add your handling code here:
-        
+
         int id;
         Conductor cond;
         float precio;
@@ -288,25 +290,25 @@ public class VentInsBus extends javax.swing.JFrame {
         String letMa;
         try {
             id = Integer.parseInt(jTId.getText());
-            cond = Chofers.devConductorId(jClistaConductores.getSelectedIndex()-1);
+            cond = Chofers.devConductorId(jClistaConductores.getSelectedIndex() - 1);
             precio = Float.parseFloat(jTprecioViaje.getText());
             letMa = jTmatLetras.getText();
             numMa = Long.parseLong(jTmatNum.getText());
             matri = new Matricula(letMa, numMa);
-            
+
             if (jRurbano.isSelected()) {
-               // System.out.println(jCruta.geti);
-               // String ruta = jCruta.getItemAt(jCruta.getItemCount());
+                // System.out.println(jCruta.geti);
+                // String ruta = jCruta.getItemAt(jCruta.getItemCount());
                 AutobusUrbano urb = new AutobusUrbano(id, cond, precio, matri, jCruta.getItemAt(jCruta.getSelectedIndex()));
                 Buses.insertar(urb);
                 JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+                this.dispose();
             } else {
             }
 
-        } catch(ExcepcionPersonal e) {
+        } catch (ExcepcionPersonal e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);

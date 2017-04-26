@@ -138,8 +138,10 @@ public class VentEleccion extends javax.swing.JFrame {
             }
         }
         if (Accion.equalsIgnoreCase("Borrar")){
-            
+            VentBusId vent = new VentBusId(Buses, Chofers, Accion);
+            vent.setVisible(true);
         }
+        this.dispose();
     }//GEN-LAST:event_jBautobusActionPerformed
 
     private void jBconductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconductorActionPerformed
@@ -158,6 +160,7 @@ public class VentEleccion extends javax.swing.JFrame {
             VentInsCond vent = new VentInsCond(Chofers);
             vent.setVisible(true);
         }
+        this.dispose();
     }//GEN-LAST:event_jBconductorActionPerformed
 
 

@@ -120,8 +120,8 @@ public class ListaAutobus {
                 borrado= true;
             }
             i++;
-        } while ((i <= listaBuses.size() - 1) && (borrado=false));
-        if(borrado=false){
+        } while ((i <= listaBuses.size()) && (!borrado));
+        if(!borrado){
             throw new ExcepcionPersonal("No se ha encotrodo el id del bus para borrarlo");
         }
         

@@ -28,7 +28,7 @@ public class ListaConductores {
     public boolean insertar(Conductor cond) throws ExcepcionPersonal {
 
         existe(cond);
-        if("".equals(cond.getNombre())){
+        if ("".equals(cond.getNombre())) {
             throw new ExcepcionPersonal("El nombre no puede estar en blanco");
         }
         return listaConductores.add(cond);
@@ -95,6 +95,7 @@ public class ListaConductores {
 
     /**
      * limpia la lista
+     *
      * @throws q12transporte.ExcepcionPersonal
      */
     public void limpiar() throws ExcepcionPersonal {
@@ -108,6 +109,11 @@ public class ListaConductores {
      * @throws q12transporte.ExcepcionPersonal
      */
     public void borrar() throws ExcepcionPersonal {
+        hay();
+        listaConductores.remove(x);
+    }
+
+    public void borrarPorNombre() throws ExcepcionPersonal {
         hay();
         listaConductores.remove(x);
     }
@@ -153,28 +159,27 @@ public class ListaConductores {
         } while ((i <= listaConductores.size() - 1) || (boovar == false));
         return boovar;
     }
-    
-    public Conductor devConductorNom(String nom) throws ExcepcionPersonal{
+
+    public Conductor devConductorNom(String nom) throws ExcepcionPersonal {
         hay();
         int i = 0;
-        boolean boovar=false;
+        boolean boovar = false;
         Conductor devo = null;
-        do {            
-            if (nom.equalsIgnoreCase(listaConductores.get(i).getNombre())){
-                boovar=true;
+        do {
+            if (nom.equalsIgnoreCase(listaConductores.get(i).getNombre())) {
+                boovar = true;
                 devo = listaConductores.get(i);
             }
         } while ((i <= listaConductores.size() - 1) || (boovar == false));
         return devo;
     }
-    
-    public Conductor devConductorId(int id) throws ExcepcionPersonal{
+
+    public Conductor devConductorId(int id) throws ExcepcionPersonal {
         hay();
         int i = 0;
-        boolean boovar=false;
+        boolean boovar = false;
         Conductor devo = listaConductores.get(id);
         return devo;
     }
-    
-    
+
 }
