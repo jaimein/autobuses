@@ -5,6 +5,7 @@
  */
 package q12transporte;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -110,19 +111,27 @@ public class VentCondNombre extends javax.swing.JFrame {
     private void jBsiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsiguienteActionPerformed
         // TODO add your handling code here:
         if (Accion.equalsIgnoreCase("Borrar")) {
+            ArrayList<Conductor> comp;
             try {
-                if (jTnombre.getText().equalsIgnoreCase(Buses.primer().getConductor().getNombre())) {
-                    throw new ExcepcionPersonal("El conductor esta asignado a un autobus");
-                };
+                if (jTnombre.getText().equalsIgnoreCase("")) {
+                        throw new ExcepcionPersonal("El nombre no puede estar en blanco");
+                    }
+                comp = Buses.devConductoresBuses();
+                int i=0;
+                do {                    
+                    if (comp.get(i).getNombre().equalsIgnoreCase(jTnombre.getText())) {
+                        throw new ExcepcionPersonal("El conductor esta asignado a un autobus, no se puede borrar");
+                    }
+                    i++;
+                } while (i < comp.size());
                 
+                Chofers.borrarPorNombre(jTnombre.getText());
                 
-                JOptionPane.showMessageDialog(null, "Autobus borrado", "Valido", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Conductor borrado", "Valido", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             } catch (ExcepcionPersonal e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            } 
         }
     }//GEN-LAST:event_jBsiguienteActionPerformed
 

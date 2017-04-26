@@ -208,7 +208,16 @@ public class ListaAutobus {
         return devo;
     }
 
-    public Conductor devConductorBus(){
+    public ArrayList<Conductor> devConductoresBuses(){
+        ArrayList<Conductor> devo = new ArrayList<Conductor>();
+        int i = 0;
+        do {            
+            devo.add(listaBuses.get(i).getConductor());
+            i++;
+        } while (i < listaBuses.size());
+        
+        return devo;
+        
         
     }
 }

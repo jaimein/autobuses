@@ -161,7 +161,8 @@ public class VentEleccion extends javax.swing.JFrame {
             vent.setVisible(true);
         }
         if (Accion.equalsIgnoreCase("Borrar")) {
-            
+            VentCondNombre vent = new VentCondNombre(Buses, Chofers, Accion);
+            vent.setVisible(true);
         }
         this.dispose();
     }//GEN-LAST:event_jBconductorActionPerformed
