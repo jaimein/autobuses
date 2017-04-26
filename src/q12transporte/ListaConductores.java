@@ -113,9 +113,21 @@ public class ListaConductores {
         listaConductores.remove(x);
     }
 
-    public void borrarPorNombre() throws ExcepcionPersonal {
+    public void borrarPorNombre(String nombre) throws ExcepcionPersonal {
         hay();
-        listaConductores.remove(x);
+        int i = 0;
+        boolean borrado = false;
+        do {
+            if (nombre.equalsIgnoreCase(listaConductores.get(i).getNombre())) {
+                listaConductores.remove(i);
+                borrado= true;
+            }
+            i++;
+        } while ((i <= listaConductores.size()) && (!borrado));
+        if(!borrado){
+            throw new ExcepcionPersonal("No se ha encotrodo el conductor para borrarlo");
+        }
+        
     }
 
     /**

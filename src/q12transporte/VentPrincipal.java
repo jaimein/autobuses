@@ -266,10 +266,10 @@ public class VentPrincipal extends javax.swing.JFrame {
         try {
             ma = new Matricula("asd", 1234);
             AutobusUrbano urb1 = new AutobusUrbano(1, cond, 22, ma, "A");
-        AutobusUrbano urb2 = new AutobusUrbano(2, cond2, 1, new Matricula("qwe", 3214), "b");
-        AutobusUrbano urb3 = new AutobusUrbano(3, cond3, 1, new Matricula("rty", 3214), "c");
-        AutobusInterurbano int1 = new AutobusInterurbano(4, cond4, 3, new Matricula("qwe", 7897),  20);
-        AutobusInterurbano int2 = new AutobusInterurbano(4, cond5, 3, new Matricula("qwe", 6574),  20);
+            AutobusUrbano urb2 = new AutobusUrbano(2, cond2, 1, new Matricula("qwe", 3214), "b");
+            AutobusUrbano urb3 = new AutobusUrbano(3, cond3, 1, new Matricula("rty", 3214), "c");
+            AutobusInterurbano int1 = new AutobusInterurbano(4, cond4, 3, new Matricula("qwe", 7897), 20);
+            AutobusInterurbano int2 = new AutobusInterurbano(4, cond5, 3, new Matricula("qwe", 6574), 20);
             ////Trampa
             Chofers.insertar(cond);
             Chofers.insertar(cond2);
@@ -282,7 +282,8 @@ public class VentPrincipal extends javax.swing.JFrame {
             Buses.insertar(urb2);
             Buses.insertar(int1);
         } catch (ExcepcionPersonal ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);        }
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

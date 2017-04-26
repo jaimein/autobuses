@@ -160,6 +160,9 @@ public class VentEleccion extends javax.swing.JFrame {
             VentInsCond vent = new VentInsCond(Chofers);
             vent.setVisible(true);
         }
+        if (Accion.equalsIgnoreCase("Borrar")) {
+            
+        }
         this.dispose();
     }//GEN-LAST:event_jBconductorActionPerformed
 

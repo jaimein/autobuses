@@ -208,4 +208,7 @@ public class ListaAutobus {
         return devo;
     }
 
+    public Conductor devConductorBus(){
+        
+    }
 }
