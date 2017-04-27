@@ -157,7 +157,7 @@ public class VentEleccion extends javax.swing.JFrame {
         }
         if (Accion.equalsIgnoreCase("Insertar")) {
             //JOptionPane.showMessageDialog(null, "pppppppp", "Error", JOptionPane.ERROR_MESSAGE);
-            VentInsCond vent = new VentInsCond(Chofers);
+            VentInsCond vent = new VentInsCond(Chofers,Accion);
             vent.setVisible(true);
         }
         if (Accion.equalsIgnoreCase("Borrar")) {

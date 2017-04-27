@@ -84,6 +84,11 @@ public class VentPrincipal extends javax.swing.JFrame {
         });
 
         jBbuscaMuestra.setText("Busca y muestra");
+        jBbuscaMuestra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscaMuestraActionPerformed(evt);
+            }
+        });
 
         jBlistar.setText("Listar");
 
@@ -298,6 +303,18 @@ public class VentPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBborrarActionPerformed
+
+    private void jBbuscaMuestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscaMuestraActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            VentEleccion ventEleccion = new VentEleccion(Buses, Chofers, "BuscaMuestra");
+            ventEleccion.setVisible(true);
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jBbuscaMuestraActionPerformed
 
     /**
      * @param args the command line arguments
