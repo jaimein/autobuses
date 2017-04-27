@@ -269,7 +269,7 @@ public class VentPrincipal extends javax.swing.JFrame {
             AutobusUrbano urb2 = new AutobusUrbano(2, cond2, 1, new Matricula("qwe", 3214), "b");
             AutobusUrbano urb3 = new AutobusUrbano(3, cond3, 1, new Matricula("rty", 3214), "c");
             AutobusInterurbano int1 = new AutobusInterurbano(4, cond4, 3, new Matricula("qwe", 7897), 20);
-            AutobusInterurbano int2 = new AutobusInterurbano(4, cond5, 3, new Matricula("qwe", 6574), 20);
+            AutobusInterurbano int2 = new AutobusInterurbano(5, cond5, 3, new Matricula("qwe", 6574), 20);
             ////Trampa
             Chofers.insertar(cond);
             Chofers.insertar(cond2);
@@ -281,6 +281,7 @@ public class VentPrincipal extends javax.swing.JFrame {
             Buses.insertar(urb3);
             Buses.insertar(urb2);
             Buses.insertar(int1);
+            JOptionPane.showMessageDialog(null, "sE HAN INTRODUCIDO DATOS", "VALIDO", JOptionPane.INFORMATION_MESSAGE);
         } catch (ExcepcionPersonal ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
