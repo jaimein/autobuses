@@ -115,19 +115,21 @@ public class ListaConductores {
 
     public void borrarPorNombre(String nombre) throws ExcepcionPersonal {
         hay();
-        int i = 0;
-        boolean borrado = false;
-        do {
-            if (nombre.equalsIgnoreCase(listaConductores.get(i).getNombre())) {
-                listaConductores.remove(i);
-                borrado= true;
+        if (!(listaConductores.isEmpty())) {
+            int i = 0;
+            boolean borrado = false;
+            do {
+                if (nombre.equalsIgnoreCase(listaConductores.get(i).getNombre())) {
+                    listaConductores.remove(i);
+                    borrado = true;
+                }
+                i++;
+            } while ((i < listaConductores.size()) && (!borrado));
+            if (!borrado) {
+                throw new ExcepcionPersonal("No se ha encotrodo el conductor para borrarlo");
             }
-            i++;
-        } while ((i <= listaConductores.size()) && (!borrado));
-        if(!borrado){
-            throw new ExcepcionPersonal("No se ha encotrodo el conductor para borrarlo");
         }
-        
+
     }
 
     /**
@@ -177,12 +179,17 @@ public class ListaConductores {
         int i = 0;
         boolean boovar = false;
         Conductor devo = null;
-        do {
+        if (listaConductores.isEmpty()) {
+            do {
             if (nom.equalsIgnoreCase(listaConductores.get(i).getNombre())) {
                 boovar = true;
                 devo = listaConductores.get(i);
             }
         } while ((i <= listaConductores.size() - 1) || (boovar == false));
+        } else {
+            throw new ExcepcionPersonal("No hay conductores");
+        }
+        
         return devo;
     }
 

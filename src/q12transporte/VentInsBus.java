@@ -36,6 +36,8 @@ public class VentInsBus extends javax.swing.JFrame {
                 jClistaConductores.addItem(conduc.siguiente().getNombre());
             } while (!(Chofers.isUltimo()));
         }
+        jTkm.setEnabled(false);
+        jLkm.setEnabled(false);
 
     }
 
@@ -70,8 +72,8 @@ public class VentInsBus extends javax.swing.JFrame {
         jBguardar = new javax.swing.JButton();
         jCruta = new javax.swing.JComboBox<>();
         jTkm = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLruta = new javax.swing.JLabel();
+        jLkm = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,6 +177,11 @@ public class VentInsBus extends javax.swing.JFrame {
 
         bGtipoBus.add(jRinterurbano);
         jRinterurbano.setText("Interurbano");
+        jRinterurbano.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRinterurbanoStateChanged(evt);
+            }
+        });
 
         jBguardar.setText("Guardar");
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -187,9 +194,9 @@ public class VentInsBus extends javax.swing.JFrame {
 
         jTkm.setEditable(false);
 
-        jLabel7.setText("Ruta");
+        jLruta.setText("Ruta");
 
-        jLabel8.setText("km");
+        jLkm.setText("km");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,7 +214,7 @@ public class VentInsBus extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jLabel7)
+                                .addComponent(jLruta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jRurbano))
@@ -217,7 +224,7 @@ public class VentInsBus extends javax.swing.JFrame {
                                 .addGap(43, 43, 43)
                                 .addComponent(jTkm, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
-                                .addComponent(jLabel8))
+                                .addComponent(jLkm))
                             .addComponent(jRinterurbano)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -242,11 +249,11 @@ public class VentInsBus extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
+                        .addComponent(jLruta)
                         .addComponent(jCruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)))
+                        .addComponent(jLkm)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -299,11 +306,15 @@ public class VentInsBus extends javax.swing.JFrame {
             if (jRurbano.isSelected()) {
                 // System.out.println(jCruta.geti);
                 // String ruta = jCruta.getItemAt(jCruta.getItemCount());
-                AutobusUrbano urb = new AutobusUrbano(id, cond, precio, matri, jCruta.getItemAt(jCruta.getSelectedIndex()));
-                Buses.insertar(urb);
+                AutobusUrbano bus = new AutobusUrbano(id, cond, precio, matri, jCruta.getItemAt(jCruta.getSelectedIndex()));
+                Buses.insertar(bus);
                 JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             } else {
+                AutobusInterurbano bus = new AutobusInterurbano(id, cond, precio, matri, Integer.parseInt(jTkm.getText()));
+                Buses.insertar(bus);
+                JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
             }
 
         } catch (ExcepcionPersonal e) {
@@ -314,6 +325,21 @@ public class VentInsBus extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBguardarActionPerformed
+
+    private void jRinterurbanoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRinterurbanoStateChanged
+        // TODO add your handling code here:
+        if (jRinterurbano.isSelected()) {
+            jCruta.setEnabled(false);
+            jLruta.setEnabled(false);
+            jTkm.setEnabled(true);
+            jLkm.setEnabled(true);
+        } else {
+            jCruta.setEnabled(true);
+            jLruta.setEnabled(true);
+            jTkm.setEnabled(false);
+            jLkm.setEnabled(false);
+        }
+    }//GEN-LAST:event_jRinterurbanoStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -328,8 +354,8 @@ public class VentInsBus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLkm;
+    private javax.swing.JLabel jLruta;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -17,6 +17,7 @@ public class VentCondNombre extends javax.swing.JFrame {
     private final String Accion;
     private ListaAutobus Buses = new ListaAutobus();
     private ListaConductores Chofers = new ListaConductores();
+
     /**
      * Creates new form VentCondNombre
      */
@@ -111,27 +112,29 @@ public class VentCondNombre extends javax.swing.JFrame {
     private void jBsiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsiguienteActionPerformed
         // TODO add your handling code here:
         if (Accion.equalsIgnoreCase("Borrar")) {
-            ArrayList<Conductor> comp;
+            ArrayList<Conductor> comp = new ArrayList<>();
             try {
                 if (jTnombre.getText().equalsIgnoreCase("")) {
-                        throw new ExcepcionPersonal("El nombre no puede estar en blanco");
-                    }
+                    throw new ExcepcionPersonal("El nombre no puede estar en blanco");
+                }
                 comp = Buses.devConductoresBuses();
-                int i=0;
-                do {                    
-                    if (comp.get(i).getNombre().equalsIgnoreCase(jTnombre.getText())) {
-                        throw new ExcepcionPersonal("El conductor esta asignado a un autobus, no se puede borrar");
-                    }
-                    i++;
-                } while (i < comp.size());
-                
+                if (!(comp.isEmpty())) {
+                    int i = 0;
+                    do {
+                        if (comp.get(i).getNombre().equalsIgnoreCase(jTnombre.getText())) {
+                            throw new ExcepcionPersonal("El conductor esta asignado a un autobus, no se puede borrar");
+                        }
+                        i++;
+                    } while (i < comp.size());
+                }
+
                 Chofers.borrarPorNombre(jTnombre.getText());
-                
+
                 JOptionPane.showMessageDialog(null, "Conductor borrado", "Valido", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             } catch (ExcepcionPersonal e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } 
+            }
         }
     }//GEN-LAST:event_jBsiguienteActionPerformed
 

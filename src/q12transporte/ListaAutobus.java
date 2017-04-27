@@ -117,14 +117,14 @@ public class ListaAutobus {
         do {
             if (id == listaBuses.get(i).getId()) {
                 listaBuses.remove(i);
-                borrado= true;
+                borrado = true;
             }
             i++;
         } while ((i <= listaBuses.size()) && (!borrado));
-        if(!borrado){
+        if (!borrado) {
             throw new ExcepcionPersonal("No se ha encotrodo el id del bus para borrarlo");
         }
-        
+
     }
 
     /**
@@ -208,16 +208,17 @@ public class ListaAutobus {
         return devo;
     }
 
-    public ArrayList<Conductor> devConductoresBuses(){
+    public ArrayList<Conductor> devConductoresBuses() {
         ArrayList<Conductor> devo = new ArrayList<Conductor>();
-        int i = 0;
-        do {            
-            devo.add(listaBuses.get(i).getConductor());
-            i++;
-        } while (i < listaBuses.size());
-        
+        if (!(listaBuses.isEmpty())) {
+            int i = 0;
+            do {
+                devo.add(listaBuses.get(i).getConductor());
+                i++;
+            } while (i < listaBuses.size());
+        }
+
         return devo;
-        
-        
+
     }
 }
