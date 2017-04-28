@@ -8,6 +8,7 @@ package q12transporte;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -31,7 +32,11 @@ public class VentEleccion extends javax.swing.JFrame {
         this.Buses = bus;
         this.Chofers = conduc;
         this.Accion = Accion;
-        //jLAccion.setText(Accion);
+        if (Accion.equalsIgnoreCase("BuscaMuestra")) {
+            JTextField jTbusca = new javax.swing.JTextField("  ", 20);
+            add(jTbusca);
+            jTbusca.setVisible(true);
+        }
                 
        
     }
@@ -163,6 +168,14 @@ public class VentEleccion extends javax.swing.JFrame {
         if (Accion.equalsIgnoreCase("Borrar")) {
             VentCondNombre vent = new VentCondNombre(Buses, Chofers, Accion);
             vent.setVisible(true);
+        }
+        if (Accion.equalsIgnoreCase("BuscarMostrar")) {
+            try {
+                VentInsCond vent = new VentInsCond(Chofers, Accion, Accion);
+            } catch (ExcepcionPersonal ex) {
+                Logger.getLogger(VentEleccion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
         this.dispose();
     }//GEN-LAST:event_jBconductorActionPerformed

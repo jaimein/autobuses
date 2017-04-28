@@ -19,13 +19,32 @@ public class VentInsCond extends javax.swing.JFrame {
     /**
      * Creates new form VentInsCond
      * @param conduc
+     * @param accion
      */
     public VentInsCond(ListaConductores conduc, String accion) {
         initComponents();
         this.Chofers = conduc;
         this.Accion = accion;
+    }
+
+    /**
+     * Pasar para buscar y mostrar
+     * @param conduc
+     * @param accion
+     * @param nombre
+     * @throws q12transporte.ExcepcionPersonal
+     */
+    public VentInsCond(ListaConductores conduc, String accion,String nombre) throws ExcepcionPersonal {
+        initComponents();
+        this.Chofers = conduc;
+        this.Accion = accion;
+        Conductor mostCond;
         if (Accion.equalsIgnoreCase("BuscarMuestra")) {
-            
+            mostCond = Chofers.devConductorNom(nombre);
+            jTnombre.setText(mostCond.getNombre());
+            jTsalario.setText(String.valueOf(mostCond.getSalario()));
+            jTnombre.setEditable(false);
+            jTsalario.setEditable(false);
         }
     }
 
