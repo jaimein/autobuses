@@ -32,13 +32,13 @@ public class VentEleccion extends javax.swing.JFrame {
         this.Buses = bus;
         this.Chofers = conduc;
         this.Accion = Accion;
-        if (Accion.equalsIgnoreCase("BuscaMuestra")) {
+        /*if (Accion.equalsIgnoreCase("BuscaMuestra")) {
             JTextField jTbusca = new javax.swing.JTextField("  ", 20);
             add(jTbusca);
+            jTbusca.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
             jTbusca.setVisible(true);
-        }
-                
-       
+        }*/
+
     }
 
     /**
@@ -92,10 +92,12 @@ public class VentEleccion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBCancelar)
                     .addComponent(jBconductor)
                     .addComponent(jLAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBautobus))
+                    .addComponent(jBautobus)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jBCancelar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,9 +111,9 @@ public class VentEleccion extends javax.swing.JFrame {
                 .addComponent(jBautobus)
                 .addGap(29, 29, 29)
                 .addComponent(jBconductor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jBCancelar)
-                .addGap(49, 49, 49))
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -142,9 +144,14 @@ public class VentEleccion extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        if (Accion.equalsIgnoreCase("Borrar")){
+        if (Accion.equalsIgnoreCase("Borrar")) {
             VentBusId vent = new VentBusId(Buses, Chofers, Accion);
             vent.setVisible(true);
+        }
+        if (Accion.equalsIgnoreCase("BuscaMuestra")) {
+            BuscaMuestra vent = new BuscaMuestra(Buses, Chofers, Accion);
+            vent.setVisible(true);
+
         }
         this.dispose();
     }//GEN-LAST:event_jBautobusActionPerformed
@@ -162,20 +169,17 @@ public class VentEleccion extends javax.swing.JFrame {
         }
         if (Accion.equalsIgnoreCase("Insertar")) {
             //JOptionPane.showMessageDialog(null, "pppppppp", "Error", JOptionPane.ERROR_MESSAGE);
-            VentInsCond vent = new VentInsCond(Chofers,Accion);
+            VentInsCond vent = new VentInsCond(Chofers, Accion);
             vent.setVisible(true);
         }
         if (Accion.equalsIgnoreCase("Borrar")) {
             VentCondNombre vent = new VentCondNombre(Buses, Chofers, Accion);
             vent.setVisible(true);
         }
-        if (Accion.equalsIgnoreCase("BuscarMostrar")) {
-            try {
-                VentInsCond vent = new VentInsCond(Chofers, Accion, Accion);
-            } catch (ExcepcionPersonal ex) {
-                Logger.getLogger(VentEleccion.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+        if (Accion.equalsIgnoreCase("BuscaMuestra")) {
+            BuscaMuestra vent = new BuscaMuestra(Chofers, Accion);
+            vent.setVisible(true);
+
         }
         this.dispose();
     }//GEN-LAST:event_jBconductorActionPerformed

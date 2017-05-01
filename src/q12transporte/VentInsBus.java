@@ -41,6 +41,49 @@ public class VentInsBus extends javax.swing.JFrame {
 
     }
 
+    VentInsBus(ListaAutobus Buses, ListaConductores Chofers, String Accion, int id) throws ExcepcionPersonal {
+        initComponents();
+        this.Buses = Buses;
+        this.Chofers = Chofers;
+        this.Accion = Accion;
+        Autobus bus;
+        bus = Buses.devAutobus(id);
+        jTId.setText(String.valueOf(bus.getId()));
+        jClistaConductores.addItem(bus.getConductor().getNombre());
+        jClistaConductores.setSelectedIndex(1);
+        jClistaConductores.setEditable(false);
+        jTprecioViaje.setText(String.valueOf(bus.getPrecioBaseViaje()));
+        if (bus instanceof AutobusInterurbano) {
+            jRurbano.setEnabled(false);
+            jCruta.setEnabled(false);
+            jRinterurbano.setSelected(true);
+            jTkm.setText(String.valueOf(((AutobusInterurbano) bus).getKm()));
+        }
+        if (bus instanceof AutobusUrbano) {
+            jRinterurbano.setEnabled(false);
+            jTkm.setEnabled(false);
+            jRurbano.setSelected(true);
+            if (((AutobusUrbano) bus).getRuta().equalsIgnoreCase("A")) {
+                jCruta.setSelectedIndex(0);
+            }
+            if (((AutobusUrbano) bus).getRuta().equalsIgnoreCase("B")) {
+                jCruta.setSelectedIndex(1);
+            }
+            if (((AutobusUrbano) bus).getRuta().equalsIgnoreCase("C")) {
+                jCruta.setSelectedIndex(2);
+            }
+            jCruta.setEditable(false);
+        }
+        jTmatLetras.setText(bus.getMatricula().getLetras());
+        jTmatNum.setText(String.valueOf(bus.getMatricula().getNumero()));
+        jTId.setEditable(false);
+        jClistaConductores.setEditable(false);
+        jTprecioViaje.setEditable(false);
+        jTmatLetras.setEditable(false);
+        jTmatNum.setEditable(false);
+        jBguardar.setText("Atras");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +118,7 @@ public class VentInsBus extends javax.swing.JFrame {
         jLruta = new javax.swing.JLabel();
         jLkm = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Introduzca los datos del autobus");
 
@@ -289,40 +332,44 @@ public class VentInsBus extends javax.swing.JFrame {
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         // TODO add your handling code here:
 
-        int id;
-        Conductor cond;
-        float precio;
-        Matricula matri;
-        long numMa;
-        String letMa;
-        try {
-            id = Integer.parseInt(jTId.getText());
-            cond = Chofers.devConductorId(jClistaConductores.getSelectedIndex() - 1);
-            precio = Float.parseFloat(jTprecioViaje.getText());
-            letMa = jTmatLetras.getText();
-            numMa = Long.parseLong(jTmatNum.getText());
-            matri = new Matricula(letMa, numMa);
+        if (Accion.equalsIgnoreCase("BuscaMuestra")) {
+            this.dispose();
+        } else {
+            int id;
+            Conductor cond;
+            float precio;
+            Matricula matri;
+            long numMa;
+            String letMa;
+            try {
+                id = Integer.parseInt(jTId.getText());
+                cond = Chofers.devConductorId(jClistaConductores.getSelectedIndex() - 1);
+                precio = Float.parseFloat(jTprecioViaje.getText());
+                letMa = jTmatLetras.getText();
+                numMa = Long.parseLong(jTmatNum.getText());
+                matri = new Matricula(letMa, numMa);
 
-            if (jRurbano.isSelected()) {
-                // System.out.println(jCruta.geti);
-                // String ruta = jCruta.getItemAt(jCruta.getItemCount());
-                AutobusUrbano bus = new AutobusUrbano(id, cond, precio, matri, jCruta.getItemAt(jCruta.getSelectedIndex()));
-                Buses.insertar(bus);
-                JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            } else {
-                AutobusInterurbano bus = new AutobusInterurbano(id, cond, precio, matri, Integer.parseInt(jTkm.getText()));
-                Buses.insertar(bus);
-                JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
+                if (jRurbano.isSelected()) {
+                    // System.out.println(jCruta.geti);
+                    // String ruta = jCruta.getItemAt(jCruta.getItemCount());
+                    AutobusUrbano bus = new AutobusUrbano(id, cond, precio, matri, jCruta.getItemAt(jCruta.getSelectedIndex()));
+                    Buses.insertar(bus);
+                    JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    AutobusInterurbano bus = new AutobusInterurbano(id, cond, precio, matri, Integer.parseInt(jTkm.getText()));
+                    Buses.insertar(bus);
+                    JOptionPane.showMessageDialog(null, "Autobus introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }
+
+            } catch (ExcepcionPersonal e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (ExcepcionPersonal e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBguardarActionPerformed
 

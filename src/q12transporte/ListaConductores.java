@@ -179,17 +179,21 @@ public class ListaConductores {
         int i = 0;
         boolean boovar = false;
         Conductor devo = null;
-        if (listaConductores.isEmpty()) {
+        if (!(listaConductores.isEmpty())) {
             do {
-            if (nom.equalsIgnoreCase(listaConductores.get(i).getNombre())) {
-                boovar = true;
-                devo = listaConductores.get(i);
+                if (nom.equalsIgnoreCase(listaConductores.get(i).getNombre())) {
+                    boovar = true;
+                    devo = listaConductores.get(i);
+                }
+                i++;
+            } while ((i < listaConductores.size()) && (boovar == false));
+            if (!boovar) {
+                throw new ExcepcionPersonal("No existe ese conductor");
             }
-        } while ((i <= listaConductores.size() - 1) || (boovar == false));
         } else {
             throw new ExcepcionPersonal("No hay conductores");
         }
-        
+
         return devo;
     }
 

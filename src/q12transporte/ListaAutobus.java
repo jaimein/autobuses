@@ -197,13 +197,20 @@ public class ListaAutobus {
         boolean boovar = false;
         hay();
         int i = 0;
-        do {
-            if (num_ident == listaBuses.get(i).getId()) {
-                devo = listaBuses.get(i);
-                boovar = true;
+        if (listaBuses.isEmpty()) {
+            throw new ExcepcionPersonal("No hay conductores");
+        } else {
+            do {
+                if (num_ident == listaBuses.get(i).getId()) {
+                    devo = listaBuses.get(i);
+                    boovar = true;
+                }
+                i++;
+            } while ((i < listaBuses.size()) && (boovar == false));
+            if (!boovar) {
+                throw new ExcepcionPersonal("No existe ese conductor");
             }
-            i++;
-        } while ((i <= listaBuses.size() - 1) || (boovar = true));
+        }
 
         return devo;
     }

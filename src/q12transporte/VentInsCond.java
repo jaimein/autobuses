@@ -18,6 +18,7 @@ public class VentInsCond extends javax.swing.JFrame {
 
     /**
      * Creates new form VentInsCond
+     *
      * @param conduc
      * @param accion
      */
@@ -29,22 +30,24 @@ public class VentInsCond extends javax.swing.JFrame {
 
     /**
      * Pasar para buscar y mostrar
+     *
      * @param conduc
      * @param accion
      * @param nombre
      * @throws q12transporte.ExcepcionPersonal
      */
-    public VentInsCond(ListaConductores conduc, String accion,String nombre) throws ExcepcionPersonal {
+    public VentInsCond(ListaConductores conduc, String accion, String nombre) throws ExcepcionPersonal {
         initComponents();
         this.Chofers = conduc;
         this.Accion = accion;
         Conductor mostCond;
-        if (Accion.equalsIgnoreCase("BuscarMuestra")) {
+        if (Accion.equalsIgnoreCase("BuscaMuestra")) {
             mostCond = Chofers.devConductorNom(nombre);
             jTnombre.setText(mostCond.getNombre());
             jTsalario.setText(String.valueOf(mostCond.getSalario()));
             jTnombre.setEditable(false);
             jTsalario.setEditable(false);
+            jBguardar.setText("Atras");
         }
     }
 
@@ -63,6 +66,7 @@ public class VentInsCond extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTnombre = new javax.swing.JTextField();
         jTsalario = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
         jBguardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -80,14 +84,27 @@ public class VentInsCond extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(jBguardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(jBguardar)
+                .addGap(22, 22, 22))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBguardar)
-                .addGap(162, 162, 162))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,6 +116,10 @@ public class VentInsCond extends javax.swing.JFrame {
                     .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTsalario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(86, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,9 +134,9 @@ public class VentInsCond extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTsalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jBguardar)
-                .addGap(44, 44, 44))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -134,16 +155,20 @@ public class VentInsCond extends javax.swing.JFrame {
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         // TODO add your handling code here:
-        try {
-            Chofers.insertar(new Conductor(jTnombre.getText(), Float.parseFloat(jTsalario.getText())));
-            JOptionPane.showMessageDialog(null, "Conductor introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
+        if (Accion.equalsIgnoreCase("BuscaMuestra")) {
             this.dispose();
-        } catch (ExcepcionPersonal e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Chofers.insertar(new Conductor(jTnombre.getText(), Float.parseFloat(jTsalario.getText())));
+                JOptionPane.showMessageDialog(null, "Conductor introducido", "Valido", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            } catch (ExcepcionPersonal e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Tiene que ser numerico", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jBguardarActionPerformed
 
@@ -154,6 +179,7 @@ public class VentInsCond extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTnombre;
     private javax.swing.JTextField jTsalario;
     // End of variables declaration//GEN-END:variables
