@@ -5,6 +5,8 @@
  */
 package q12transporte;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,18 +16,34 @@ import javax.swing.JOptionPane;
 public class VentInsCond extends javax.swing.JFrame {
 
     private ListaConductores Chofers = new ListaConductores();
-    String Accion;
+    private String Accion;
+    private Conductor mostCond;
 
     /**
      * Creates new form VentInsCond
      *
      * @param conduc
      * @param accion
+     * @throws q12transporte.ExcepcionPersonal
      */
-    public VentInsCond(ListaConductores conduc, String accion) {
+    public VentInsCond(ListaConductores conduc, String accion) throws ExcepcionPersonal {
         initComponents();
         this.Chofers = conduc;
         this.Accion = accion;
+        jPbotonesNav.setVisible(false);
+        if (Accion.equalsIgnoreCase("Listar")) {
+            jPboton.setVisible(false);
+            jPbotonesNav.setVisible(true);
+            mostCond = Chofers.primer();
+            jTnombre.setText(mostCond.getNombre());
+            jTsalario.setText(String.valueOf(mostCond.getSalario()));
+            jTnombre.setEditable(false);
+            jTsalario.setEditable(false);
+            jBant.setEnabled(false);
+            jBprimero.setEnabled(false);
+            jTpos.setText(String.valueOf(Chofers.pos()+1));
+            jTpos.setEditable(false);
+        }
     }
 
     /**
@@ -40,7 +58,7 @@ public class VentInsCond extends javax.swing.JFrame {
         initComponents();
         this.Chofers = conduc;
         this.Accion = accion;
-        Conductor mostCond;
+        jPbotonesNav.setVisible(false);
         if (Accion.equalsIgnoreCase("BuscaMuestra")) {
             mostCond = Chofers.devConductorNom(nombre);
             jTnombre.setText(mostCond.getNombre());
@@ -66,7 +84,14 @@ public class VentInsCond extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTnombre = new javax.swing.JTextField();
         jTsalario = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        jPbotonesNav = new javax.swing.JPanel();
+        jBult = new javax.swing.JButton();
+        jBsiguiente = new javax.swing.JButton();
+        jBprimero = new javax.swing.JButton();
+        jBant = new javax.swing.JButton();
+        jTpos = new javax.swing.JTextField();
+        jBatras = new javax.swing.JButton();
+        jPboton = new javax.swing.JPanel();
         jBguardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -77,6 +102,74 @@ public class VentInsCond extends javax.swing.JFrame {
 
         jLabel3.setText("salario");
 
+        jBult.setText("Ultimo");
+        jBult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBultActionPerformed(evt);
+            }
+        });
+
+        jBsiguiente.setText("Siguiente");
+        jBsiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsiguienteActionPerformed(evt);
+            }
+        });
+
+        jBprimero.setText("Primero");
+        jBprimero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBprimeroActionPerformed(evt);
+            }
+        });
+
+        jBant.setText("Anterior");
+        jBant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBantActionPerformed(evt);
+            }
+        });
+
+        jBatras.setText("Atras");
+        jBatras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBatrasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPbotonesNavLayout = new javax.swing.GroupLayout(jPbotonesNav);
+        jPbotonesNav.setLayout(jPbotonesNavLayout);
+        jPbotonesNavLayout.setHorizontalGroup(
+            jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbotonesNavLayout.createSequentialGroup()
+                .addComponent(jBprimero)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBant)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBsiguiente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBult))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbotonesNavLayout.createSequentialGroup()
+                .addComponent(jBatras)
+                .addGap(176, 176, 176))
+        );
+        jPbotonesNavLayout.setVerticalGroup(
+            jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBult)
+                    .addComponent(jBsiguiente)
+                    .addComponent(jBprimero)
+                    .addComponent(jBant)
+                    .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBatras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         jBguardar.setText("Guardar");
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,18 +177,18 @@ public class VentInsCond extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPbotonLayout = new javax.swing.GroupLayout(jPboton);
+        jPboton.setLayout(jPbotonLayout);
+        jPbotonLayout.setHorizontalGroup(
+            jPbotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPbotonLayout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(jBguardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        jPbotonLayout.setVerticalGroup(
+            jPbotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbotonLayout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jBguardar)
                 .addGap(22, 22, 22))
@@ -115,10 +208,14 @@ public class VentInsCond extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTsalario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPboton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPbotonesNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -134,9 +231,11 @@ public class VentInsCond extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTsalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(66, 66, 66)
+                .addComponent(jPboton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPbotonesNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,7 +246,9 @@ public class VentInsCond extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,15 +273,136 @@ public class VentInsCond extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBguardarActionPerformed
 
+    private void jBsiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsiguienteActionPerformed
+        try {
+            // TODO add your handling code here:
+            mostCond = Chofers.siguiente();
+            jTnombre.setText(mostCond.getNombre());
+            jTsalario.setText(String.valueOf(mostCond.getSalario()));
+            jTpos.setText(String.valueOf(Chofers.pos()+1));
+            if (Chofers.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Chofers.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+            
+            
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBsiguienteActionPerformed
+
+    private void jBantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBantActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            mostCond = Chofers.anterior();
+            jTnombre.setText(mostCond.getNombre());
+            jTsalario.setText(String.valueOf(mostCond.getSalario()));
+            jTpos.setText(String.valueOf(Chofers.pos()+1));
+            if (Chofers.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Chofers.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBantActionPerformed
+
+    private void jBultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBultActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            mostCond = Chofers.ultimo();
+            jTnombre.setText(mostCond.getNombre());
+            jTsalario.setText(String.valueOf(mostCond.getSalario()));
+            jTpos.setText(String.valueOf(Chofers.pos()+1));
+            if (Chofers.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Chofers.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBultActionPerformed
+
+    private void jBprimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBprimeroActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            mostCond = Chofers.primer();
+            jTnombre.setText(mostCond.getNombre());
+            jTsalario.setText(String.valueOf(mostCond.getSalario()));
+            jTpos.setText(String.valueOf(Chofers.pos()+1));
+            if (Chofers.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Chofers.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBprimeroActionPerformed
+
+    private void jBatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBatrasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBatrasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBant;
+    private javax.swing.JButton jBatras;
     private javax.swing.JButton jBguardar;
+    private javax.swing.JButton jBprimero;
+    private javax.swing.JButton jBsiguiente;
+    private javax.swing.JButton jBult;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPboton;
+    private javax.swing.JPanel jPbotonesNav;
     private javax.swing.JTextField jTnombre;
+    private javax.swing.JTextField jTpos;
     private javax.swing.JTextField jTsalario;
     // End of variables declaration//GEN-END:variables
 }

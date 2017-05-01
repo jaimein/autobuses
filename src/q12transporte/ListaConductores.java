@@ -92,6 +92,24 @@ public class ListaConductores {
         hay();
         return listaConductores.size() - 1 == x;
     }
+    
+    /**
+     * pregunta si el que se esta mostrando es el primero
+     * @return
+     * @throws ExcepcionPersonal
+     */
+    public boolean isPrimer() throws ExcepcionPersonal {
+        hay();
+        return 0 == x;
+    }
+    
+    public int pos() throws ExcepcionPersonal {
+        hay();
+        return x;
+    }
+    
+    
+    
 
     /**
      * limpia la lista

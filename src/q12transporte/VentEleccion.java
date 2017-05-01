@@ -151,7 +151,10 @@ public class VentEleccion extends javax.swing.JFrame {
         if (Accion.equalsIgnoreCase("BuscaMuestra")) {
             BuscaMuestra vent = new BuscaMuestra(Buses, Chofers, Accion);
             vent.setVisible(true);
-
+        }
+        if (Accion.equalsIgnoreCase("Listar")) {
+            BuscaMuestra vent = new BuscaMuestra(Buses, Chofers, Accion);
+            vent.setVisible(true);
         }
         this.dispose();
     }//GEN-LAST:event_jBautobusActionPerformed
@@ -169,8 +172,14 @@ public class VentEleccion extends javax.swing.JFrame {
         }
         if (Accion.equalsIgnoreCase("Insertar")) {
             //JOptionPane.showMessageDialog(null, "pppppppp", "Error", JOptionPane.ERROR_MESSAGE);
-            VentInsCond vent = new VentInsCond(Chofers, Accion);
-            vent.setVisible(true);
+            VentInsCond vent;
+            try {
+                vent = new VentInsCond(Chofers, Accion);
+                vent.setVisible(true);
+            } catch (ExcepcionPersonal ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
         if (Accion.equalsIgnoreCase("Borrar")) {
             VentCondNombre vent = new VentCondNombre(Buses, Chofers, Accion);
@@ -179,7 +188,14 @@ public class VentEleccion extends javax.swing.JFrame {
         if (Accion.equalsIgnoreCase("BuscaMuestra")) {
             BuscaMuestra vent = new BuscaMuestra(Chofers, Accion);
             vent.setVisible(true);
-
+        }
+        if (Accion.equalsIgnoreCase("Listar")) {
+            try {
+                VentInsCond vent = new VentInsCond(Chofers, Accion);
+                vent.setVisible(true);
+            } catch (ExcepcionPersonal ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         this.dispose();
     }//GEN-LAST:event_jBconductorActionPerformed
