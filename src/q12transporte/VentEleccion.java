@@ -153,8 +153,12 @@ public class VentEleccion extends javax.swing.JFrame {
             vent.setVisible(true);
         }
         if (Accion.equalsIgnoreCase("Listar")) {
-            BuscaMuestra vent = new BuscaMuestra(Buses, Chofers, Accion);
-            vent.setVisible(true);
+            try {
+                VentInsBus vent = new VentInsBus(Buses, Chofers, Accion);
+                vent.setVisible(true);
+            } catch (ExcepcionPersonal ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         this.dispose();
     }//GEN-LAST:event_jBautobusActionPerformed
