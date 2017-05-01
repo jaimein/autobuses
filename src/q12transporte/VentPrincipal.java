@@ -61,6 +61,7 @@ public class VentPrincipal extends javax.swing.JFrame {
         jMIbuscaMuestraConductor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jBlimpiar.setText("Limpiar lista");
         jBlimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +105,7 @@ public class VentPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("InsertAle");
+        jButton1.setText("Insertar Aleatorios");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -116,9 +117,9 @@ public class VentPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(246, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(29, 29, 29))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -134,14 +135,14 @@ public class VentPrincipal extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBSalir)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(31, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(73, 73, 73)
                 .addComponent(jButton1)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -164,9 +165,19 @@ public class VentPrincipal extends javax.swing.JFrame {
         jMinsertar.setText("Insertar");
 
         jMIinsertarAutobus.setText("Autobus");
+        jMIinsertarAutobus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIinsertarAutobusActionPerformed(evt);
+            }
+        });
         jMinsertar.add(jMIinsertarAutobus);
 
         jMIinsertarConductor.setText("Conductor");
+        jMIinsertarConductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIinsertarConductorActionPerformed(evt);
+            }
+        });
         jMinsertar.add(jMIinsertarConductor);
 
         jMenuAcciones.add(jMinsertar);
@@ -174,9 +185,19 @@ public class VentPrincipal extends javax.swing.JFrame {
         jMborrar.setText("Borrar");
 
         jMIborrarAutobus.setText("Autobus");
+        jMIborrarAutobus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIborrarAutobusActionPerformed(evt);
+            }
+        });
         jMborrar.add(jMIborrarAutobus);
 
         jMIborrarConductor.setText("Conductor");
+        jMIborrarConductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIborrarConductorActionPerformed(evt);
+            }
+        });
         jMborrar.add(jMIborrarConductor);
 
         jMenuAcciones.add(jMborrar);
@@ -196,9 +217,19 @@ public class VentPrincipal extends javax.swing.JFrame {
         jMListar.setText("Listar");
 
         jMIlistarAutobus.setText("Autobus");
+        jMIlistarAutobus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIlistarAutobusActionPerformed(evt);
+            }
+        });
         jMListar.add(jMIlistarAutobus);
 
         jMIlistarConductor.setText("Conductor");
+        jMIlistarConductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIlistarConductorActionPerformed(evt);
+            }
+        });
         jMListar.add(jMIlistarConductor);
 
         jMenuVer.add(jMListar);
@@ -206,9 +237,19 @@ public class VentPrincipal extends javax.swing.JFrame {
         jMbuscaMuestra.setText("Busca y muestra");
 
         jMIbuscaMuestraAutobus.setText("Autobus");
+        jMIbuscaMuestraAutobus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIbuscaMuestraAutobusActionPerformed(evt);
+            }
+        });
         jMbuscaMuestra.add(jMIbuscaMuestraAutobus);
 
         jMIbuscaMuestraConductor.setText("Conductor");
+        jMIbuscaMuestraConductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIbuscaMuestraConductorActionPerformed(evt);
+            }
+        });
         jMbuscaMuestra.add(jMIbuscaMuestraConductor);
 
         jMenuVer.add(jMbuscaMuestra);
@@ -221,9 +262,10 @@ public class VentPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +360,7 @@ public class VentPrincipal extends javax.swing.JFrame {
         } catch (ExcepcionPersonal ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jBbuscaMuestraActionPerformed
 
     private void jBlistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlistarActionPerformed
@@ -331,6 +373,72 @@ public class VentPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBlistarActionPerformed
+
+    private void jMIinsertarAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIinsertarAutobusActionPerformed
+        // TODO add your handling code here:
+        try {
+            //JOptionPane.showMessageDialog(null, "pppppppp", "Error", JOptionPane.ERROR_MESSAGE);
+            VentInsBus vent = new VentInsBus(Buses, Chofers, "Insertar");
+            vent.setVisible(true);
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIinsertarAutobusActionPerformed
+
+    private void jMIinsertarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIinsertarConductorActionPerformed
+        // TODO add your handling code here:
+        VentInsCond vent;
+        try {
+            vent = new VentInsCond(Chofers, "Insertar");
+            vent.setVisible(true);
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIinsertarConductorActionPerformed
+
+    private void jMIborrarAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIborrarAutobusActionPerformed
+        // TODO add your handling code here:
+        VentBusId vent = new VentBusId(Buses, Chofers, "Borrar");
+        vent.setVisible(true);
+    }//GEN-LAST:event_jMIborrarAutobusActionPerformed
+
+    private void jMIborrarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIborrarConductorActionPerformed
+        // TODO add your handling code here:
+        VentCondNombre vent = new VentCondNombre(Buses, Chofers, "Borrar");
+        vent.setVisible(true);
+    }//GEN-LAST:event_jMIborrarConductorActionPerformed
+
+    private void jMIlistarAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIlistarAutobusActionPerformed
+        // TODO add your handling code here:
+        try {
+            VentInsBus vent = new VentInsBus(Buses, Chofers, "Listar");
+            vent.setVisible(true);
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIlistarAutobusActionPerformed
+
+    private void jMIlistarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIlistarConductorActionPerformed
+        // TODO add your handling code here:
+        try {
+            VentInsCond vent = new VentInsCond(Chofers, "Listar");
+            vent.setVisible(true);
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMIlistarConductorActionPerformed
+
+    private void jMIbuscaMuestraAutobusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIbuscaMuestraAutobusActionPerformed
+        // TODO add your handling code here:
+        BuscaMuestra vent = new BuscaMuestra(Buses, Chofers, "BuscaMuestra");
+        vent.setVisible(true);
+    }//GEN-LAST:event_jMIbuscaMuestraAutobusActionPerformed
+
+    private void jMIbuscaMuestraConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIbuscaMuestraConductorActionPerformed
+        // TODO add your handling code here:
+        BuscaMuestra vent = new BuscaMuestra(Chofers, "BuscaMuestra");
+        vent.setVisible(true);
+    }//GEN-LAST:event_jMIbuscaMuestraConductorActionPerformed
 
     /**
      * @param args the command line arguments

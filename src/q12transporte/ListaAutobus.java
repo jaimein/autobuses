@@ -92,6 +92,16 @@ public class ListaAutobus {
         return listaBuses.size() - 1 == x;
     }
 
+    public boolean isPrimer() throws ExcepcionPersonal {
+        hay();
+        return 0 == x;
+    }
+
+    public int pos() throws ExcepcionPersonal {
+        hay();
+        return x;
+    }
+
     /**
      * limpia la lista
      */

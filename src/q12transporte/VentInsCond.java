@@ -102,28 +102,28 @@ public class VentInsCond extends javax.swing.JFrame {
 
         jLabel3.setText("salario");
 
-        jBult.setText("Ultimo");
+        jBult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/ult.png"))); // NOI18N
         jBult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBultActionPerformed(evt);
             }
         });
 
-        jBsiguiente.setText("Siguiente");
+        jBsiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/sig.png"))); // NOI18N
         jBsiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBsiguienteActionPerformed(evt);
             }
         });
 
-        jBprimero.setText("Primero");
+        jBprimero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/pri.png"))); // NOI18N
         jBprimero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBprimeroActionPerformed(evt);
             }
         });
 
-        jBant.setText("Anterior");
+        jBant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/ant.png"))); // NOI18N
         jBant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBantActionPerformed(evt);
@@ -141,33 +141,41 @@ public class VentInsCond extends javax.swing.JFrame {
         jPbotonesNav.setLayout(jPbotonesNavLayout);
         jPbotonesNavLayout.setHorizontalGroup(
             jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbotonesNavLayout.createSequentialGroup()
-                .addComponent(jBprimero)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBant)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBsiguiente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBult))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbotonesNavLayout.createSequentialGroup()
-                .addComponent(jBatras)
-                .addGap(176, 176, 176))
+            .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                        .addComponent(jBprimero)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBant)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBsiguiente)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBult, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jBatras)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPbotonesNavLayout.setVerticalGroup(
             jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPbotonesNavLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBult)
-                    .addComponent(jBsiguiente)
-                    .addComponent(jBprimero)
-                    .addComponent(jBant)
-                    .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBult, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBsiguiente)
+                            .addComponent(jBprimero, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBant))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbotonesNavLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jBatras)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jBguardar.setText("Guardar");
@@ -213,9 +221,7 @@ public class VentInsCond extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPboton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPbotonesNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPbotonesNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -242,13 +248,11 @@ public class VentInsCond extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

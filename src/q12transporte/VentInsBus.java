@@ -16,6 +16,7 @@ public class VentInsBus extends javax.swing.JFrame {
     private final String Accion;
     private ListaAutobus Buses = new ListaAutobus();
     private ListaConductores Chofers = new ListaConductores();
+    private Autobus autobus;
 
     /**
      * Creates new form VentInsBus
@@ -30,14 +31,56 @@ public class VentInsBus extends javax.swing.JFrame {
         this.Buses = bus;
         this.Chofers = conduc;
         this.Accion = Accion;
-        jClistaConductores.addItem(conduc.primer().getNombre());
-        if (!conduc.isUltimo()) {
-            do {
-                jClistaConductores.addItem(conduc.siguiente().getNombre());
-            } while (!(Chofers.isUltimo()));
+        if (Accion.equalsIgnoreCase("Insertar")) {
+
+            jClistaConductores.addItem(conduc.primer().getNombre());
+            if (!conduc.isUltimo()) {
+                do {
+                    jClistaConductores.addItem(conduc.siguiente().getNombre());
+                } while (!(Chofers.isUltimo()));
+            }
+            jTkm.setEnabled(false);
+            jLkm.setEnabled(false);
+            jPbotonesNav.setVisible(false);
         }
-        jTkm.setEnabled(false);
-        jLkm.setEnabled(false);
+        if (Accion.equalsIgnoreCase("Listar")) {
+            jPguardar.setVisible(false);
+            jPbotonesNav.setVisible(true);
+            autobus = Buses.primer();
+            jTId.setText(String.valueOf(autobus.getId()));
+            jClistaConductores.addItem(autobus.getConductor().getNombre());
+            jClistaConductores.setSelectedIndex(1);
+            jTprecioViaje.setText(String.valueOf(autobus.getPrecioBaseViaje()));
+            if (autobus instanceof AutobusInterurbano) {
+                jRurbano.setEnabled(false);
+                jCruta.setEnabled(false);
+                jRinterurbano.setSelected(true);
+                jTkm.setText(String.valueOf(((AutobusInterurbano) autobus).getKm()));
+            }
+            if (autobus instanceof AutobusUrbano) {
+                jRinterurbano.setEnabled(false);
+                jTkm.setEnabled(false);
+                jRurbano.setSelected(true);
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("A")) {
+                    jCruta.setSelectedIndex(0);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("B")) {
+                    jCruta.setSelectedIndex(1);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("C")) {
+                    jCruta.setSelectedIndex(2);
+                }
+                jCruta.setEditable(false);
+            }
+            jTmatLetras.setText(autobus.getMatricula().getLetras());
+            jTmatNum.setText(String.valueOf(autobus.getMatricula().getNumero()));
+            jTId.setEditable(false);
+            jClistaConductores.setEditable(false);
+            jTprecioViaje.setEditable(false);
+            jTmatLetras.setEditable(false);
+            jTmatNum.setEditable(false);
+
+        }
 
     }
 
@@ -48,6 +91,7 @@ public class VentInsBus extends javax.swing.JFrame {
         this.Accion = Accion;
         Autobus bus;
         bus = Buses.devAutobus(id);
+        jPbotonesNav.setVisible(false);
         jTId.setText(String.valueOf(bus.getId()));
         jClistaConductores.addItem(bus.getConductor().getNombre());
         jClistaConductores.setSelectedIndex(1);
@@ -112,11 +156,19 @@ public class VentInsBus extends javax.swing.JFrame {
         jTmatNum = new javax.swing.JTextField();
         jRurbano = new javax.swing.JRadioButton();
         jRinterurbano = new javax.swing.JRadioButton();
-        jBguardar = new javax.swing.JButton();
         jCruta = new javax.swing.JComboBox<>();
         jTkm = new javax.swing.JTextField();
         jLruta = new javax.swing.JLabel();
         jLkm = new javax.swing.JLabel();
+        jPbotonesNav = new javax.swing.JPanel();
+        jBult = new javax.swing.JButton();
+        jBsiguiente = new javax.swing.JButton();
+        jBprimero = new javax.swing.JButton();
+        jBant = new javax.swing.JButton();
+        jTpos = new javax.swing.JTextField();
+        jBatras = new javax.swing.JButton();
+        jPguardar = new javax.swing.JPanel();
+        jBguardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -165,7 +217,7 @@ public class VentInsBus extends javax.swing.JFrame {
                         .addComponent(jTId)
                         .addComponent(jClistaConductores, 0, 92, Short.MAX_VALUE))
                     .addComponent(jTprecioViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,13 +278,6 @@ public class VentInsBus extends javax.swing.JFrame {
             }
         });
 
-        jBguardar.setText("Guardar");
-        jBguardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBguardarActionPerformed(evt);
-            }
-        });
-
         jCruta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
 
         jTkm.setEditable(false);
@@ -240,6 +285,106 @@ public class VentInsBus extends javax.swing.JFrame {
         jLruta.setText("Ruta");
 
         jLkm.setText("km");
+
+        jBult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/ult.png"))); // NOI18N
+        jBult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBultActionPerformed(evt);
+            }
+        });
+
+        jBsiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/sig.png"))); // NOI18N
+        jBsiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsiguienteActionPerformed(evt);
+            }
+        });
+
+        jBprimero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/pri.png"))); // NOI18N
+        jBprimero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBprimeroActionPerformed(evt);
+            }
+        });
+
+        jBant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/q12transporte/ant.png"))); // NOI18N
+        jBant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBantActionPerformed(evt);
+            }
+        });
+
+        jBatras.setText("Atras");
+        jBatras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBatrasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPbotonesNavLayout = new javax.swing.GroupLayout(jPbotonesNav);
+        jPbotonesNav.setLayout(jPbotonesNavLayout);
+        jPbotonesNavLayout.setHorizontalGroup(
+            jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                        .addComponent(jBprimero)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBant)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBsiguiente)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBult, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jBatras)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPbotonesNavLayout.setVerticalGroup(
+            jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPbotonesNavLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPbotonesNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBult, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBsiguiente)
+                            .addComponent(jBprimero, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBant))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbotonesNavLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTpos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(jBatras)
+                .addContainerGap())
+        );
+
+        jBguardar.setText("Guardar");
+        jBguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPguardarLayout = new javax.swing.GroupLayout(jPguardar);
+        jPguardar.setLayout(jPguardarLayout);
+        jPguardarLayout.setHorizontalGroup(
+            jPguardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPguardarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBguardar)
+                .addGap(23, 23, 23))
+        );
+        jPguardarLayout.setVerticalGroup(
+            jPguardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPguardarLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jBguardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -273,9 +418,10 @@ public class VentInsBus extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBguardar)
+            .addComponent(jPguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPbotonesNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -297,10 +443,13 @@ public class VentInsBus extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLkm)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBguardar))
+                .addComponent(jPguardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPbotonesNav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -322,8 +471,8 @@ public class VentInsBus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -388,11 +537,253 @@ public class VentInsBus extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jRinterurbanoStateChanged
 
+    private void jBultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBultActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            autobus = Buses.ultimo();
+            jTId.setText(String.valueOf(autobus.getId()));
+            jClistaConductores.addItem(autobus.getConductor().getNombre());
+            jClistaConductores.setSelectedIndex(1);
+            jTprecioViaje.setText(String.valueOf(autobus.getPrecioBaseViaje()));
+            if (autobus instanceof AutobusInterurbano) {
+                jRurbano.setEnabled(false);
+                jCruta.setEnabled(false);
+                jRinterurbano.setSelected(true);
+                jTkm.setText(String.valueOf(((AutobusInterurbano) autobus).getKm()));
+            }
+            if (autobus instanceof AutobusUrbano) {
+                jRinterurbano.setEnabled(false);
+                jTkm.setEnabled(false);
+                jRurbano.setSelected(true);
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("A")) {
+                    jCruta.setSelectedIndex(0);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("B")) {
+                    jCruta.setSelectedIndex(1);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("C")) {
+                    jCruta.setSelectedIndex(2);
+                }
+                jCruta.setEditable(false);
+            }
+            jTmatLetras.setText(autobus.getMatricula().getLetras());
+            jTmatNum.setText(String.valueOf(autobus.getMatricula().getNumero()));
+            jTId.setEditable(false);
+            jClistaConductores.setEditable(false);
+            jTprecioViaje.setEditable(false);
+            jTmatLetras.setEditable(false);
+            jTmatNum.setEditable(false);
+
+            jTpos.setText(String.valueOf(Buses.pos() + 1));
+            if (Buses.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Buses.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBultActionPerformed
+
+    private void jBsiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsiguienteActionPerformed
+        try {
+            // TODO add your handling code here:
+            autobus = Buses.siguiente();
+            jTId.setText(String.valueOf(autobus.getId()));
+            jClistaConductores.addItem(autobus.getConductor().getNombre());
+            jClistaConductores.setSelectedIndex(1);
+            jTprecioViaje.setText(String.valueOf(autobus.getPrecioBaseViaje()));
+            if (autobus instanceof AutobusInterurbano) {
+                jRurbano.setEnabled(false);
+                jCruta.setEnabled(false);
+                jRinterurbano.setSelected(true);
+                jTkm.setText(String.valueOf(((AutobusInterurbano) autobus).getKm()));
+            }
+            if (autobus instanceof AutobusUrbano) {
+                jRinterurbano.setEnabled(false);
+                jTkm.setEnabled(false);
+                jRurbano.setSelected(true);
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("A")) {
+                    jCruta.setSelectedIndex(0);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("B")) {
+                    jCruta.setSelectedIndex(1);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("C")) {
+                    jCruta.setSelectedIndex(2);
+                }
+                jCruta.setEditable(false);
+            }
+            jTmatLetras.setText(autobus.getMatricula().getLetras());
+            jTmatNum.setText(String.valueOf(autobus.getMatricula().getNumero()));
+            jTId.setEditable(false);
+            jClistaConductores.setEditable(false);
+            jTprecioViaje.setEditable(false);
+            jTmatLetras.setEditable(false);
+            jTmatNum.setEditable(false);
+
+            jTpos.setText(String.valueOf(Buses.pos() + 1));
+            if (Buses.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Buses.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBsiguienteActionPerformed
+
+    private void jBprimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBprimeroActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            autobus = Buses.primer();
+            jTId.setText(String.valueOf(autobus.getId()));
+            jClistaConductores.addItem(autobus.getConductor().getNombre());
+            jClistaConductores.setSelectedIndex(1);
+            jTprecioViaje.setText(String.valueOf(autobus.getPrecioBaseViaje()));
+            if (autobus instanceof AutobusInterurbano) {
+                jRurbano.setEnabled(false);
+                jCruta.setEnabled(false);
+                jRinterurbano.setSelected(true);
+                jTkm.setText(String.valueOf(((AutobusInterurbano) autobus).getKm()));
+            }
+            if (autobus instanceof AutobusUrbano) {
+                jRinterurbano.setEnabled(false);
+                jTkm.setEnabled(false);
+                jRurbano.setSelected(true);
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("A")) {
+                    jCruta.setSelectedIndex(0);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("B")) {
+                    jCruta.setSelectedIndex(1);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("C")) {
+                    jCruta.setSelectedIndex(2);
+                }
+                jCruta.setEditable(false);
+            }
+            jTmatLetras.setText(autobus.getMatricula().getLetras());
+            jTmatNum.setText(String.valueOf(autobus.getMatricula().getNumero()));
+            jTId.setEditable(false);
+            jClistaConductores.setEditable(false);
+            jTprecioViaje.setEditable(false);
+            jTmatLetras.setEditable(false);
+            jTmatNum.setEditable(false);
+
+            jTpos.setText(String.valueOf(Buses.pos() + 1));
+            if (Buses.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Buses.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBprimeroActionPerformed
+
+    private void jBantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBantActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            autobus = Buses.anterior();
+            jTId.setText(String.valueOf(autobus.getId()));
+            jClistaConductores.addItem(autobus.getConductor().getNombre());
+            jClistaConductores.setSelectedIndex(1);
+            jTprecioViaje.setText(String.valueOf(autobus.getPrecioBaseViaje()));
+            if (autobus instanceof AutobusInterurbano) {
+                jRurbano.setEnabled(false);
+                jCruta.setEnabled(false);
+                jRinterurbano.setSelected(true);
+                jTkm.setText(String.valueOf(((AutobusInterurbano) autobus).getKm()));
+            }
+            if (autobus instanceof AutobusUrbano) {
+                jRinterurbano.setEnabled(false);
+                jTkm.setEnabled(false);
+                jRurbano.setSelected(true);
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("A")) {
+                    jCruta.setSelectedIndex(0);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("B")) {
+                    jCruta.setSelectedIndex(1);
+                }
+                if (((AutobusUrbano) autobus).getRuta().equalsIgnoreCase("C")) {
+                    jCruta.setSelectedIndex(2);
+                }
+                jCruta.setEditable(false);
+            }
+            jTmatLetras.setText(autobus.getMatricula().getLetras());
+            jTmatNum.setText(String.valueOf(autobus.getMatricula().getNumero()));
+            jTId.setEditable(false);
+            jClistaConductores.setEditable(false);
+            jTprecioViaje.setEditable(false);
+            jTmatLetras.setEditable(false);
+            jTmatNum.setEditable(false);
+
+            jTpos.setText(String.valueOf(Buses.pos() + 1));
+            if (Buses.isPrimer()) {
+                jBant.setEnabled(false);
+                jBprimero.setEnabled(false);
+            } else {
+                jBant.setEnabled(true);
+                jBprimero.setEnabled(true);
+            }
+            if (Buses.isUltimo()) {
+                jBsiguiente.setEnabled(false);
+                jBult.setEnabled(false);
+            } else {
+                jBsiguiente.setEnabled(true);
+                jBult.setEnabled(true);
+            }
+        } catch (ExcepcionPersonal ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBantActionPerformed
+
+    private void jBatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBatrasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBatrasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGtipoBus;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jBant;
+    private javax.swing.JButton jBatras;
     private javax.swing.JButton jBguardar;
+    private javax.swing.JButton jBprimero;
+    private javax.swing.JButton jBsiguiente;
+    private javax.swing.JButton jBult;
     private javax.swing.JComboBox<String> jClistaConductores;
     private javax.swing.JComboBox<String> jCruta;
     private javax.swing.JLabel jLabel1;
@@ -407,12 +798,15 @@ public class VentInsBus extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPbotonesNav;
+    private javax.swing.JPanel jPguardar;
     private javax.swing.JRadioButton jRinterurbano;
     private javax.swing.JRadioButton jRurbano;
     private javax.swing.JTextField jTId;
     private javax.swing.JTextField jTkm;
     private javax.swing.JTextField jTmatLetras;
     private javax.swing.JTextField jTmatNum;
+    private javax.swing.JTextField jTpos;
     private javax.swing.JTextField jTprecioViaje;
     // End of variables declaration//GEN-END:variables
 }
