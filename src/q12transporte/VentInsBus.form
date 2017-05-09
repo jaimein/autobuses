@@ -396,11 +396,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jBult" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
                                   <Component id="jBsiguiente" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jBprimero" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                                   <Component id="jBant" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jBprimero" min="-2" pref="41" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="12" max="32767" attributes="0"/>
                           </Group>
@@ -420,7 +420,7 @@
             <Component class="javax.swing.JButton" name="jBult">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/q12transporte/ult.png"/>
+                  <Image iconType="3" name="/q12transporte/img/ult.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -430,7 +430,7 @@
             <Component class="javax.swing.JButton" name="jBsiguiente">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/q12transporte/sig.png"/>
+                  <Image iconType="3" name="/q12transporte/img/sig.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -440,7 +440,7 @@
             <Component class="javax.swing.JButton" name="jBprimero">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/q12transporte/pri.png"/>
+                  <Image iconType="3" name="/q12transporte/img/pri.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -450,7 +450,7 @@
             <Component class="javax.swing.JButton" name="jBant">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/q12transporte/ant.png"/>
+                  <Image iconType="3" name="/q12transporte/img/ant.png"/>
                 </Property>
               </Properties>
               <Events>
